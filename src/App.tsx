@@ -202,11 +202,11 @@ export default function App() {
           )}
         </Card>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 bg-white border border-stone-200 rounded-lg shadow-sm p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-8 bg-white border border-stone-200 rounded-lg shadow-sm p-3 sm:p-6">
           {/* Left: Rod entry */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 min-w-0">
             <Card className="border-stone-200 shadow-sm bg-white text-black">
-              <CardHeader className="pb-4 pt-6 px-6">
+              <CardHeader className="pb-4 pt-5 sm:pt-6 px-4 sm:px-6">
                 <CardTitle className="text-base text-stone-800 flex items-center gap-3">
                   <Ruler className="w-4 h-4 text-teal-700" />
                   Karniz o'lchamlari
@@ -215,7 +215,7 @@ export default function App() {
                   Har bir karnizning uzunligini metrda kiriting.
                 </p>
               </CardHeader>
-              <CardContent className="space-y-5 px-6 pb-6">
+              <CardContent className="space-y-4 sm:space-y-5 px-4 sm:px-6 pb-5 sm:pb-6">
                 {rods.map((rod, idx) => (
                   <RodRow
                     key={rod.id}
@@ -243,7 +243,7 @@ export default function App() {
           </div>
 
           {/* Right: Summary */}
-          <div className="space-y-4">
+          <div className="space-y-4 min-w-0">
             <SummaryCard summary={summary} hasResults={hasResults} />
           </div>
         </div>
@@ -258,7 +258,7 @@ export default function App() {
               </CardTitle>
             </CardHeader>
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full min-w-[760px] text-sm">
                 <thead>
                   <tr className="bg-stone-100 border-y border-stone-200">
                     <th className="text-left px-6 py-4 font-medium text-stone-600 w-12">
@@ -364,11 +364,11 @@ interface RodRowProps {
 
 function RodRow({ rod, index, result, onLengthChange, onRemove }: RodRowProps) {
   return (
-    <div className="flex items-center gap-4 group">
-      <span className="w-6 text-center text-xs text-stone-500 font-mono shrink-0">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:flex-nowrap sm:gap-4 group">
+      <span className="w-5 text-center text-xs text-stone-500 font-mono shrink-0">
         {index + 1}
       </span>
-      <div className="relative flex-1">
+      <div className="relative flex-1 min-w-[100px]">
         <Input
           type="number"
           min="0.1"
@@ -383,28 +383,28 @@ function RodRow({ rod, index, result, onLengthChange, onRemove }: RodRowProps) {
         </span>
       </div>
       {result ? (
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 order-3 sm:order-none w-full sm:w-auto pl-8 sm:pl-0">
           <Badge
             variant="secondary"
-            className="bg-sky-100 text-sky-800 border-sky-200 text-xs px-3 py-1 gap-1.5"
+            className="bg-sky-100 text-sky-800 border-sky-200 text-[10px] sm:text-xs px-2 sm:px-3 py-1 gap-1 sm:gap-1.5"
           >
             <span className="opacity-70">Quloqcha</span> {result.ears}
           </Badge>
           <Badge
             variant="secondary"
-            className="bg-amber-100 text-amber-800 border-amber-200 text-xs px-3 py-1 gap-1.5"
+            className="bg-amber-100 text-amber-800 border-amber-200 text-[10px] sm:text-xs px-2 sm:px-3 py-1 gap-1 sm:gap-1.5"
           >
             <span className="opacity-70">Kronshteyn</span> {result.brackets}
           </Badge>
         </div>
       ) : (
-        <div className="w-[190px] shrink-0" />
+        <div className="hidden sm:block w-[190px] shrink-0" />
       )}
       <button
         type="button"
         onClick={onRemove}
         disabled={!onRemove}
-        className="w-9 h-9 flex items-center justify-center rounded-md text-stone-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-0 disabled:pointer-events-none shrink-0"
+        className="w-9 h-9 flex items-center justify-center rounded-md text-stone-400 hover:text-red-600 hover:bg-red-50 transition-colors disabled:opacity-0 disabled:pointer-events-none shrink-0 ml-auto sm:ml-0"
         aria-label="Karnizni o'chirish"
       >
         <Trash2 className="w-4 h-4" />
@@ -420,7 +420,7 @@ interface SummaryCardProps {
 
 function SummaryCard({ summary, hasResults }: SummaryCardProps) {
   return (
-    <Card className="border-stone-200 shadow-sm sticky top-28 bg-white text-black">
+    <Card className="border-stone-200 shadow-sm lg:sticky lg:top-28 bg-white text-black">
       <CardHeader className="pb-4 pt-6 px-6">
         <CardTitle className="text-base text-stone-800">
           Buyurtma xulosasi
